@@ -4,9 +4,6 @@ describe KaminariJSON::Pagination do
   describe '#paginated_records' do
     it "calls pagination for options" do
       records = [1,2,3,4,5]
-      paged_records = double(records)
-      records.should_receive(:page).with(2) { paged_records }
-      paged_records.should_receive(:per).with(3) { [4,5] }
       paginator = KaminariJSON::Pagination.new(records, {page_offset: 2, page_size: 3})
       expect(paginator.paginated_records).to eq([4,5])
     end

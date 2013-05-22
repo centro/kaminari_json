@@ -21,7 +21,8 @@ module KaminariJSON
     end
 
     def paginated_records
-      records.page(options[:page_offset]).per(options[:page_size])
+      to_paginate = records.is_a?(Array) ? Kaminari.paginate_array(records) : records
+      to_paginate.page(options[:page_offset]).per(options[:page_size])
     end
 
     def pagination_hash
