@@ -1,6 +1,6 @@
 # KaminariJson
 
-TODO: Write a gem description
+Provides a helper method to add pagination information to JSON responses.
 
 ## Installation
 
@@ -18,7 +18,30 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Adds pagination information based on the Array or ActiveRecord::Relation passed in and returns a JSON
+object.
+
+Example:
+```
+class SomeController < ApplicationController
+
+  def index
+    @things = Thing.all
+    respond_to do |format|
+      format.json do
+        render json: json_paginate(@things)
+      end
+    end
+  end
+end
+```
+
+An ActiveModel::Serializer can be specified as well.
+
+```
+render json: json_paginate(things, each_serializer: StatementForListSerializer)
+```
+
 
 ## Contributing
 
